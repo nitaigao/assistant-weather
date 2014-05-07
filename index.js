@@ -35,6 +35,7 @@ function processCommand(command) {
   weather({logging: true, appid:'Q2_Ky4zV34FoqoNxkluqSyzvnSWiyyZhc3v5EVRdqXdutumqGZbWdm_qcxFfcNnLmA--', location: 'Esher'}, function(data) {
     console.log(data);
 
-    request.get("http://localhost:4000?say=" + querystring.escape(data.text))
+    var summary = "The weather is currently " + querystring.escape(data.text.toLowerCase())
+    request.get("http://localhost:4000?say=" + summary)
   });
 }
