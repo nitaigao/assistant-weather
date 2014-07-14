@@ -1,6 +1,7 @@
 var http        = require('http'),
     request     = require('request'),
-    querystring = require('querystring');
+    querystring = require('querystring'),
+    weather     = require('weather');
 
 
 function createServer(port) {
@@ -32,11 +33,19 @@ start()
 
 function processCommand(command) {
   console.log(command)
-
-  var weather = require('weather');
+  
   weather({logging: true, appid:'Q2_Ky4zV34FoqoNxkluqSyzvnSWiyyZhc3v5EVRdqXdutumqGZbWdm_qcxFfcNnLmA--', location: 'Esher'}, function(data) {
     console.log(data);
 
-    request.get("http://localhost:4000?say=" + querystring.escape(data.text))
+      if (command.category == "weather") {
+        var summary = "The weather is currently " + querystring.escape(data.text.toLowerCase())
+        request.get("http://localhost:4000?say=" + summary)
+      }
+
+      if (command.category == "temperature") {
+        var temperature = "The temperature is currently " + querystring.escape(data.temp) + " degrees C"    
+        request.get("http://localhost:4000?say=" + temperature)
+      }
+
   });
 }
