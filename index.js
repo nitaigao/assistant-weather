@@ -16,8 +16,10 @@ function createServer(port) {
       res.writeHead(200, {'Access-Control-Allow-Origin': '*'})
       res.end('OK!');
 
-      var formData = JSON.parse(body);
-      processCommand(formData)
+      if (body.length > 0) {
+        var formData = JSON.parse(body);
+        processCommand(formData)
+      }
     });
 
   }).listen(port)
@@ -31,20 +33,33 @@ function start() {
 
 start()
 
+process.env.NODE_ENV = process.env.NODE_ENV || "development"
+
+var SAY_URLS = {
+  "development": "http://localhost:4000",
+  "production" : "http://assistant-say.herokuapp.com"
+}
+
+function say(message) {
+  request.get(SAY_URLS[process.env.NODE_ENV] + "?say=" + message, function(err) {
+    console.log("Failed to send say: " + message)
+  })
+}
+
 function processCommand(command) {
   console.log(command)
-  
+
   weather({logging: true, appid:'Q2_Ky4zV34FoqoNxkluqSyzvnSWiyyZhc3v5EVRdqXdutumqGZbWdm_qcxFfcNnLmA--', location: 'Esher'}, function(data) {
     console.log(data);
 
       if (command.category == "weather") {
         var summary = "The weather is currently " + querystring.escape(data.text.toLowerCase())
-        request.get("http://localhost:4000?say=" + summary)
+        say(summary)
       }
 
       if (command.category == "temperature") {
-        var temperature = "The temperature is currently " + querystring.escape(data.temp) + " degrees C"    
-        request.get("http://localhost:4000?say=" + temperature)
+        var temperature = "The temperature is currently " + querystring.escape(data.temp) + " degrees C"
+        say(temperature)
       }
 
   });
