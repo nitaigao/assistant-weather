@@ -23,7 +23,9 @@ function createServer(port) {
 }
 
 function start() {
-  createServer(8101)
+  var port = Number(process.env.PORT || 8181);
+  console.log("Started on port " + port)
+  createServer(port)
 }
 
 start()
