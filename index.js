@@ -42,12 +42,12 @@ function processCommand(command) {
 
       if (command.category == "weather") {
         var summary = "The weather is currently " + querystring.escape(data.text.toLowerCase())
-        say(summary)
+        say.message(summary)
       }
 
       if (command.category == "temperature") {
         var temperature = "The temperature is currently " + querystring.escape(data.temp) + " degrees C"
-        say(temperature)
+        say.message(temperature)
       }
 
   });
