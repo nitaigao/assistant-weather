@@ -1,0 +1,11 @@
+{
+  "default": {
+    "say": "http://localhost:4000"
+  },
+  "development": {
+    "say": "http://localhost:4000"
+  },
+  "production": {
+    "say": "http://assistant-say.herokuapp.com"
+  }
+}

@@ -1,8 +1,9 @@
 var http        = require('http'),
     request     = require('request'),
     querystring = require('querystring'),
-    weather     = require('weather');
-
+    weather     = require('weather')
+    say         = require('say')
+    ;
 
 function createServer(port) {
   http.createServer(function (req, res) {
@@ -32,19 +33,6 @@ function start() {
 }
 
 start()
-
-process.env.NODE_ENV = process.env.NODE_ENV || "development"
-
-var SAY_URLS = {
-  "development": "http://localhost:4000",
-  "production" : "http://assistant-say.herokuapp.com"
-}
-
-function say(message) {
-  request.get(SAY_URLS[process.env.NODE_ENV] + "?say=" + message, function(err) {
-    console.log("Failed to send say: " + message)
-  })
-}
 
 function processCommand(command) {
   console.log(command)

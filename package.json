@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "request": "~2.34.0",
     "weather": "",
-    "request": "~2.34.0"
+    "say": "nkostelnik/assistant-say"
   }
 }
