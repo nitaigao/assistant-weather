@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "env-settings": "^0.2.7",
     "faye": "^1.0.3",
     "request": "~2.34.0",
     "say": "nkostelnik/assistant-say",
