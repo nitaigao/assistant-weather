@@ -9,6 +9,6 @@
   },
   "production": {
     "say": "http://assistant-say.herokuapp.com",
-    "brain": "http://assistant-brain.herokuapp.com"
+    "brain": "http://assistant-detection.herokuapp.com"
   }
 }
